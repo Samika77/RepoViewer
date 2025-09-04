@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translatable="false">RepoViewer</string>
+    <string name="personal_access_token">Personal access token</string>
+    <string name="invalid_token">Invalid token</string>
+    <string name="sign_in">Sign in</string>
+    <string name="repositories">Repositories</string>
+    <string name="back">Back</string>
+    <string name="log_out">Log out</string>
+    <string name="connection_error">Connection error</string>
+    <string name="check_connection">Check your Internet connection</string>
+    <string name="empty">Empty</string>
+    <string name="no_repositories">No repositories at the moment</string>
+    <string name="something_error">Something error</string>
+    <string name="check_something">Check your something</string>
+    <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
+    <string name="link">Link to the repository</string>
+    <string name="license">License</string>
+    <string name="stars">stars</string>
+    <string name="forks">forks</string>
+    <string name="watchers">watchers</string>
+    <string name="no_readme">No README.md</string>
+</resources>

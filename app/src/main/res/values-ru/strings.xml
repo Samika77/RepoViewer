@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="personal_access_token">Персональный токен доступа</string>
+    <string name="invalid_token">Неверный токен</string>
+    <string name="sign_in">Войти</string>
+    <string name="repositories">Репозитории</string>
+    <string name="back">Назад</string>
+    <string name="log_out">Выйти</string>
+    <string name="connection_error">Ошибка подключения</string>
+    <string name="check_connection">Проверьте подключение к Интернету</string>
+    <string name="empty">Пусто</string>
+    <string name="no_repositories">Репозиториев пока нет</string>
+    <string name="something_error">Произошла ошибка</string>
+    <string name="check_something">Проверьте что-то свое</string>
+    <string name="retry">Повторить</string>
+    <string name="refresh">Обновить</string>
+    <string name="link">Ссылка на репозиторий</string>
+    <string name="license">Лицензия</string>
+    <string name="stars">Звезды</string>
+    <string name="forks">Копии</string>
+    <string name="watchers">Подписчики</string>
+    <string name="no_readme">Отсутствует README.md</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#0D1117</color>
+    <color name="accent">#438440</color>
+    <color name="white_50_percent">#80FFFFFF</color>
+    <color name="error">#B00020</color>
+    <color name="white_12_percent">#1FFFFFFF</color>
+    <color name="gray">#21262D</color>
+    <color name="blue">#58A6FF</color>
+    <color name="purple">#A37AEE</color>
+    <color name="yellow">#F4E264</color>
+    <color name="status_bar">#161B22</color>
+    <color name="red">#CB4F4F</color>
+    <color name="light_yellow">#FAD876</color>
+    <color name="green">#6ED370</color>
+    <color name="light_blue">#9CFFF9</color>
+    <color name="white_70_percent">#B3FFFFFF</color>
+</resources>
