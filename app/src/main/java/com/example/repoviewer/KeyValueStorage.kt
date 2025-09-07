@@ -12,6 +12,7 @@ class KeyValueStorage @Inject constructor(
         set(value) = sharedPreferences.edit {
             putString(KEY_AUTH_TOKEN, value)
         }
+
     companion object {
         private const val KEY_AUTH_TOKEN = "auth_token"
     }
