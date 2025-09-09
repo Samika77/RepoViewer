@@ -58,4 +58,6 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2KotlinxSerializationConverter)
 }
