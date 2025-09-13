@@ -2,6 +2,11 @@
     <string name="app_name" translatable="false">RepoViewer</string>
     <string name="personal_access_token">Personal access token</string>
     <string name="invalid_token">Invalid token</string>
+    <string name="empty_token">Token must not be empty</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="error_title">Error</string>
+    <string name="ok_button">OK</string>
+    <string name="error_message">Error data / error code&#10;Information for developers:&#10;%1$s</string>
     <string name="sign_in">Sign in</string>
     <string name="repositories">Repositories</string>
     <string name="back">Back</string>

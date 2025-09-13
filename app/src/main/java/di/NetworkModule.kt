@@ -17,11 +17,15 @@ object NetworkModule {
     private const val BASE_URL = "https://api.github.com/"
     private val CONTENT_TYPE = "application/json".toMediaType()
 
+    private val json = Json {
+        ignoreUnknownKeys = true
+    }
+
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(Json.asConverterFactory(CONTENT_TYPE))
+        .addConverterFactory(json.asConverterFactory(CONTENT_TYPE))
         .build()
 
     @Provides

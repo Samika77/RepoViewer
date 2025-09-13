@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,10 +23,14 @@ class AuthViewModel @Inject constructor(
     private val _actions = MutableSharedFlow<Action>()
     val actions: Flow<Action> = _actions.asSharedFlow()
 
+    fun refreshState() {
+        _state.value = _state.value
+    }
+
     fun onSignButtonPressed() {
         val currentToken = token.value
         if (currentToken.isNullOrBlank()) {
-            _state.value = State.InvalidInput("Token must not be empty")
+            _state.value = State.InvalidInput(ErrorReason.EMPTY_TOKEN)
             return
         }
 
@@ -36,15 +41,18 @@ class AuthViewModel @Inject constructor(
                 if (userInfo.tokenValid) {
                     _actions.emit(Action.RouteToMain)
                     _state.value = State.Idle
-                } else {
-                    _state.value = State.InvalidInput("Invalid token")
                 }
             } catch (e: Exception) {
-                _actions.emit(
-                    Action.ShowError(
-                        e.message ?: "Unknown error"
-                    )
-                )
+                if (e is HttpException && e.code() == 401) {
+                    _state.value = State.InvalidInput(ErrorReason.INVALID_TOKEN)
+                    return@launch
+                }
+                val message = e.message.takeUnless { it.isNullOrBlank() }
+                if (message != null) {
+                    _actions.emit(Action.ShowError(message))
+                } else {
+                    _state.value = State.InvalidInput(ErrorReason.UNKNOWN_ERROR)
+                }
                 _state.value = State.Idle
             }
         }
@@ -53,11 +61,17 @@ class AuthViewModel @Inject constructor(
     sealed interface State {
         object Idle : State
         object Loading : State
-        data class InvalidInput(val reason: String) : State
+        data class InvalidInput(val reasonCode: ErrorReason) : State
     }
 
     sealed interface Action {
         data class ShowError(val message: String) : Action
         object RouteToMain : Action
+    }
+
+    enum class ErrorReason {
+        EMPTY_TOKEN,
+        INVALID_TOKEN,
+        UNKNOWN_ERROR
     }
 }
