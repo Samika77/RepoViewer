@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_repositoriesListFragment_to_detailInfoFragment"
             app:destination="@id/detailInfoFragment" />
+
+        <action
+            android:id="@+id/action_repositoriesListFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/repositoriesListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
