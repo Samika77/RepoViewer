@@ -1,15 +1,15 @@
-package di
+package com.example.repoviewer.di
 
-import com.example.repoviewer.GithubApi
+import com.example.repoviewer.data.network.GithubApi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import javax.inject.Singleton
-import kotlinx.serialization.json.Json
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)

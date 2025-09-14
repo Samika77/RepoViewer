@@ -1,8 +1,8 @@
-package di
+package com.example.repoviewer.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.repoviewer.KeyValueStorage
+import com.example.repoviewer.data.storage.KeyValueStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

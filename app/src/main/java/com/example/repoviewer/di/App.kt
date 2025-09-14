@@ -1,4 +1,4 @@
-package com.example.repoviewer
+package com.example.repoviewer.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

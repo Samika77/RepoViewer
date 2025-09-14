@@ -1,5 +1,8 @@
-package com.example.repoviewer
+package com.example.repoviewer.data.repository
 
+import com.example.repoviewer.data.network.GithubApi
+import com.example.repoviewer.data.storage.KeyValueStorage
+import com.example.repoviewer.data.network.UserInfo
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(

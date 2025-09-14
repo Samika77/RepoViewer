@@ -1,8 +1,8 @@
-package com.example.repoviewer
+package com.example.repoviewer.data.storage
 
 import android.content.SharedPreferences
-import javax.inject.Inject
 import androidx.core.content.edit
+import javax.inject.Inject
 
 class KeyValueStorage @Inject constructor(
     private val sharedPreferences: SharedPreferences

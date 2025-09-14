@@ -10,7 +10,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingBottom="16dp"
-    tools:context=".AuthFragment">
+    tools:context=".ui.fragment.AuthFragment">
 
     <ImageView
         android:id="@+id/image_logo"

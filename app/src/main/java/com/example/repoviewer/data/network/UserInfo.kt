@@ -1,4 +1,4 @@
-package com.example.repoviewer
+package com.example.repoviewer.data.network
 
 import kotlinx.serialization.Serializable
 

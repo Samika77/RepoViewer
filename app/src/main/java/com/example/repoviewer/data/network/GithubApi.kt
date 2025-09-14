@@ -1,5 +1,6 @@
-package com.example.repoviewer
+package com.example.repoviewer.data.network
 
+import com.example.repoviewer.data.network.UserInfo
 import retrofit2.http.GET
 import retrofit2.http.Header
 

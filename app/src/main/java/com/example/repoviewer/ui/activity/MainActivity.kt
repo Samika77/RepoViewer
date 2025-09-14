@@ -1,10 +1,11 @@
-package com.example.repoviewer
+package com.example.repoviewer.ui.activity
 
-import androidx.core.view.WindowCompat
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
+import com.example.repoviewer.R
 import com.example.repoviewer.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
