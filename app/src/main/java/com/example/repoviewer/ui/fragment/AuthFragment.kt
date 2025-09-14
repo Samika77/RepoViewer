@@ -50,8 +50,9 @@ class AuthFragment : Fragment() {
                 systemBarInsets.bottom
             )
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val defaultMarginBottom = resources.getDimensionPixelSize(R.dimen.default_button_margin_bottom)
             binding.buttonSignIn.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = imeInsets.bottom
+                bottomMargin = if (imeInsets.bottom > 0) imeInsets.bottom else defaultMarginBottom
             }
             insets
         }
