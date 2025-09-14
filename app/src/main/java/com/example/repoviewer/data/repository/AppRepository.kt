@@ -1,6 +1,7 @@
 package com.example.repoviewer.data.repository
 
 import com.example.repoviewer.data.network.GithubApi
+import com.example.repoviewer.data.network.Repo
 import com.example.repoviewer.data.storage.KeyValueStorage
 import com.example.repoviewer.data.network.UserInfo
 import javax.inject.Inject
@@ -16,5 +17,11 @@ class AppRepository @Inject constructor(
             storage.authToken = token
         }
         return userInfo
+    }
+
+    suspend fun getRepositories(): List<Repo> {
+        val token = storage.authToken!!
+        val authHeader = "token $token"
+        return api.getUserRepositories(authHeader, perPage = 10)
     }
 }
