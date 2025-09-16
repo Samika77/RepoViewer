@@ -39,9 +39,9 @@ class RepositoriesListViewModel @Inject constructor(
                     return@launch
                 }
                 _state.value = State.Loaded(repos)
-            } catch (e: IOException) {
+            } catch (_: IOException) {
                 _state.value = State.Error.ConnectionError
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 _state.value = State.Error.GeneralError
             }
         }

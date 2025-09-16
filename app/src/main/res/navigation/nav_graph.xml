@@ -37,6 +37,10 @@
         android:id="@+id/detailInfoFragment"
         android:name="com.example.repoviewer.ui.fragment.DetailInfoFragment"
         android:label="Detail Info"
-        tools:layout="@layout/detail_info_fragment" />
+        tools:layout="@layout/detail_info_fragment">
 
+        <argument
+            android:name="repoId"
+            app:argType="string" />
+    </fragment>
 </navigation>
