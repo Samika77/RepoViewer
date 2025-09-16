@@ -68,7 +68,6 @@ class RepositoriesListViewModel @Inject constructor(
             object ConnectionError : Error()
             object GeneralError : Error()
         }
-
         object Empty : State
     }
 

@@ -2,11 +2,13 @@ package com.example.repoviewer.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.repoviewer.data.network.Repo
 import com.example.repoviewer.databinding.ItemRepositoryBinding
+import com.example.repoviewer.R
 
 class RepoAdapter : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK) {
     private var onItemClickListener: ((String) -> Unit)? = null
@@ -32,6 +34,15 @@ class RepoAdapter : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK)
             binding.textRepoName.text = repo.name
             binding.textRepoLanguage.text = repo.language
             binding.textRepoDescription.text = repo.description ?: "No description"
+
+            val color = when (repo.language.lowercase()) {
+                "kotlin" -> ContextCompat.getColor(binding.root.context, R.color.purple)
+                "java" -> ContextCompat.getColor(binding.root.context, R.color.red)
+                "javascript" -> ContextCompat.getColor(binding.root.context, R.color.yellow)
+                else -> ContextCompat.getColor(binding.root.context, R.color.white)
+            }
+
+            binding.textRepoLanguage.setTextColor(color)
 
             binding.root.setOnClickListener {
                 clickListener?.invoke(repo.repoId)
