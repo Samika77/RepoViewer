@@ -69,6 +69,18 @@ class RepositoriesListFragment : Fragment() {
             viewModel.logout()
         }
 
+        binding.buttonRetryConnectionError.buttonRetry.setOnClickListener {
+            viewModel.retryLoad()
+        }
+
+        binding.buttonRetrySomethingError.buttonRetry.setOnClickListener {
+            viewModel.retryLoad()
+        }
+
+        binding.buttonRefreshRepositories.setOnClickListener {
+            viewModel.refreshList()
+        }
+
         adapter.setOnItemClickListener { repoId ->
             viewModel.onRepositorySelected(repoId)
         }

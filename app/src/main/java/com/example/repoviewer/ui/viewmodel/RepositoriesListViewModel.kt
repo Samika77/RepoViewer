@@ -47,6 +47,14 @@ class RepositoriesListViewModel @Inject constructor(
         }
     }
 
+    fun retryLoad() {
+        loadRepositories()
+    }
+
+    fun refreshList() {
+        loadRepositories()
+    }
+
     fun onRepositorySelected(repoId: String) {
         if (repoId.isBlank()) return
         viewModelScope.launch {
