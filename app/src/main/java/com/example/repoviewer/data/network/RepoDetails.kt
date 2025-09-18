@@ -40,3 +40,9 @@ data class LicenseInfo(
 data class Owner(
     val login: String
 )
+
+@Serializable
+data class ReadmeResponse(
+    val content: String,
+    val encoding: String
+)
