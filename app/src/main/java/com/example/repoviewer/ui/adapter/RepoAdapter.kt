@@ -33,7 +33,8 @@ class RepoAdapter : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK)
         fun bind(repo: Repo, clickListener: ((String) -> Unit)?) {
             binding.textRepoName.text = repo.name
             binding.textRepoLanguage.text = repo.language
-            binding.textRepoDescription.text = repo.description ?: "No description"
+            binding.textRepoDescription.text =
+                repo.description ?: binding.root.context.getString(R.string.no_description)
 
             val color = when (repo.language.lowercase()) {
                 "kotlin" -> ContextCompat.getColor(binding.root.context, R.color.purple)

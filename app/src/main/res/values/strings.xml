@@ -11,6 +11,7 @@
     <string name="repositories">Repositories</string>
     <string name="back">Back</string>
     <string name="log_out">Log out</string>
+    <string name="no_description">No description</string>
     <string name="connection_error">Connection error</string>
     <string name="check_connection">Check your Internet connection</string>
     <string name="empty">Empty</string>
