@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.repoviewer.data.network.Repo
+import com.example.repoviewer.domain.model.Repo
 import com.example.repoviewer.databinding.ItemRepositoryBinding
 import com.example.repoviewer.R
 

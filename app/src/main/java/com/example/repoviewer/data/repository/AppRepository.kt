@@ -1,9 +1,10 @@
 package com.example.repoviewer.data.repository
 
 import com.example.repoviewer.data.network.GithubApi
-import com.example.repoviewer.data.network.Repo
 import com.example.repoviewer.data.storage.KeyValueStorage
 import com.example.repoviewer.data.network.UserInfo
+import com.example.repoviewer.data.network.toDomain
+import com.example.repoviewer.domain.model.Repo
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
@@ -22,6 +23,7 @@ class AppRepository @Inject constructor(
     suspend fun getRepositories(): List<Repo> {
         val token = storage.authToken!!
         val authHeader = "token $token"
-        return api.getUserRepositories(authHeader, perPage = 10)
+        val networkRepos = api.getUserRepositories(authHeader, perPage = 10)
+        return networkRepos.map { it.toDomain() }
     }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.repoviewer.data.network.Repo
+import com.example.repoviewer.domain.model.Repo
 import com.example.repoviewer.data.repository.AppRepository
 import com.example.repoviewer.data.storage.KeyValueStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
