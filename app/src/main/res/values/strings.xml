@@ -21,6 +21,7 @@
     <string name="refresh">Refresh</string>
     <string name="link">Link to the repository</string>
     <string name="license">License</string>
+    <string name="no_license">No license</string>
     <string name="stars">stars</string>
     <string name="forks">forks</string>
     <string name="watchers">watchers</string>

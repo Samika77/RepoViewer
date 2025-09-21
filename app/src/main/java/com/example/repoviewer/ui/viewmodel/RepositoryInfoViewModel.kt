@@ -27,36 +27,53 @@ class RepositoryInfoViewModel @Inject constructor(
     fun loadRepositoryDetails(repoId: String) {
         _state.value = State.Loading
         viewModelScope.launch {
-            try {
-                val repoDetails = repository.getRepository(repoId)
-                _state.value = State.Loaded(
-                    githubRepo = repoDetails,
-                    readmeState = ReadmeState.Loading
+            val repoDetails = try {
+                repository.getRepository(repoId)
+            } catch (_: Exception) {
+                _state.value = State.Error
+                return@launch
+            }
+            _state.value = State.Loaded(
+                githubRepo = repoDetails,
+                readmeState = ReadmeState.Loading
+            )
+
+            val readmeMarkdown = try {
+                repository.getRepositoryReadme(
+                    ownerName = repoDetails.owner.login,
+                    repositoryName = repoDetails.name,
+                    branchName = repoDetails.defaultBranch
                 )
-                try {
-                    val readmeMarkdown = repository.getRepositoryReadme(
-                        ownerName = repoDetails.owner.login,
-                        repositoryName = repoDetails.name,
-                        branchName = repoDetails.defaultBranch
-                    )
-                    val readmeState = if (readmeMarkdown.isBlank()) {
-                        ReadmeState.Empty
-                    } else {
-                        ReadmeState.Loaded(readmeMarkdown)
-                    }
+            } catch (e: retrofit2.HttpException) {
+                if (e.code() == 404) {
                     _state.value = State.Loaded(
                         githubRepo = repoDetails,
-                        readmeState = readmeState
+                        readmeState = ReadmeState.Empty
                     )
-                } catch (_: Exception) {
+                } else {
                     _state.value = State.Loaded(
                         githubRepo = repoDetails,
                         readmeState = ReadmeState.Error
                     )
                 }
+                return@launch
             } catch (_: Exception) {
-                _state.value = State.Error
+                _state.value = State.Loaded(
+                    githubRepo = repoDetails,
+                    readmeState = ReadmeState.Error
+                )
+                return@launch
             }
+
+            val readmeState = if (readmeMarkdown.isBlank()) {
+                ReadmeState.Empty
+            } else {
+                ReadmeState.Loaded(readmeMarkdown)
+            }
+            _state.value = State.Loaded(
+                githubRepo = repoDetails,
+                readmeState = readmeState
+            )
         }
     }
 

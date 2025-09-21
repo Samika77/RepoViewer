@@ -20,6 +20,7 @@
     <string name="refresh">Обновить</string>
     <string name="link">Ссылка на репозиторий</string>
     <string name="license">Лицензия</string>
+    <string name="no_license">Нет лицензии</string>
     <string name="stars">Звезды</string>
     <string name="forks">Копии</string>
     <string name="watchers">Подписчики</string>
