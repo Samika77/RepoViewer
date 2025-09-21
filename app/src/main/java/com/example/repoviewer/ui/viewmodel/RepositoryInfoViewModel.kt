@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.repoviewer.data.network.RepoDetails
 import com.example.repoviewer.data.repository.AppRepository
 import com.example.repoviewer.data.storage.KeyValueStorage
+import com.example.repoviewer.domain.model.RepoDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -40,7 +40,7 @@ class RepositoryInfoViewModel @Inject constructor(
 
             val readmeMarkdown = try {
                 repository.getRepositoryReadme(
-                    ownerName = repoDetails.owner.login,
+                    ownerName = repoDetails.ownerLogin,
                     repositoryName = repoDetails.name,
                     branchName = repoDetails.defaultBranch
                 )
@@ -65,10 +65,10 @@ class RepositoryInfoViewModel @Inject constructor(
                 return@launch
             }
 
-            val readmeState = if (readmeMarkdown.isBlank()) {
+            val readmeState = if (readmeMarkdown.content.isBlank()) {
                 ReadmeState.Empty
             } else {
-                ReadmeState.Loaded(readmeMarkdown)
+                ReadmeState.Loaded(readmeMarkdown.content)
             }
             _state.value = State.Loaded(
                 githubRepo = repoDetails,

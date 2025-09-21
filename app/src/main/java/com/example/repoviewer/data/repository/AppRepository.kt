@@ -2,9 +2,11 @@ package com.example.repoviewer.data.repository
 
 import com.example.repoviewer.data.network.GithubApi
 import com.example.repoviewer.data.network.Repo
-import com.example.repoviewer.data.network.RepoDetails
 import com.example.repoviewer.data.storage.KeyValueStorage
 import com.example.repoviewer.data.network.UserInfo
+import com.example.repoviewer.data.network.toDomain
+import com.example.repoviewer.domain.model.Readme
+import com.example.repoviewer.domain.model.RepoDetails
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
@@ -31,17 +33,16 @@ class AppRepository @Inject constructor(
 
     suspend fun getRepository(repoId: String): RepoDetails {
         val (owner, repoName) = repoId.split("/")
-        return api.getRepository(getAuthHeader(), owner, repoName)
+        val repoDetailsResponse = api.getRepository(getAuthHeader(), owner, repoName)
+        return repoDetailsResponse.toDomain()
     }
 
     suspend fun getRepositoryReadme(
         ownerName: String,
         repositoryName: String,
         branchName: String
-    ): String {
+    ): Readme {
         val readmeResponse = api.getRepositoryReadme(getAuthHeader(), ownerName, repositoryName)
-        val decodedBytes =
-            android.util.Base64.decode(readmeResponse.content, android.util.Base64.DEFAULT)
-        return String(decodedBytes, Charsets.UTF_8)
+        return readmeResponse.toDomain()
     }
 }

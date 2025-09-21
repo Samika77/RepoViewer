@@ -18,7 +18,6 @@ import com.example.repoviewer.databinding.DetailInfoFragmentBinding
 import com.example.repoviewer.ui.viewmodel.RepositoryInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.repoviewer.R
 import io.noties.markwon.Markwon
 import kotlin.getValue
 
@@ -130,8 +129,7 @@ class DetailInfoFragment : Fragment() {
             binding.textStarsCount.text = repoDetail.stargazersCount.toString()
             binding.textForksCount.text = repoDetail.forksCount.toString()
             binding.textWatchersCount.text = repoDetail.watchersCount.toString()
-            binding.textLicenseValue.text =
-                repoDetail.license?.name ?: getString(R.string.no_license)
+            binding.textLicenseValue.text = repoDetail.licenseName
             binding.textLink.text = repoDetail.htmlUrl
 
             (requireActivity() as AppCompatActivity).supportActionBar?.title = repoDetail.name
