@@ -40,7 +40,7 @@ class AuthViewModel @Inject constructor(
             _state.value = State.Loading
             try {
                 val userInfo = repository.signIn(currentToken)
-                if (userInfo.tokenValid) {
+                if (userInfo.isTokenValid) {
                     _actions.emit(Action.RouteToMain)
                     _state.value = State.Idle
                 }
