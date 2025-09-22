@@ -74,33 +74,36 @@
         app:layout_constraintTop_toBottomOf="@id/input_layout_token"
         tools:text="Invalid token" />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_sign_in_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <android.widget.Button
             android:id="@+id/button_sign_in"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/shape_button"
             android:text="@string/sign_in"
             android:textAppearance="@style/ButtonStyle"
-            tools:text="Sign in" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/progress_bar_sign_in"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
             android:indeterminate="true"
             android:indeterminateDrawable="@drawable/animated_rotate"
-            android:visibility="gone" />
-    </FrameLayout>
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/button_sign_in"
+            app:layout_constraintEnd_toEndOf="@id/button_sign_in"
+            app:layout_constraintStart_toStartOf="@id/button_sign_in"
+            app:layout_constraintTop_toTopOf="@id/button_sign_in" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
