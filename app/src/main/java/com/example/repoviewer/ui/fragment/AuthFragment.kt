@@ -41,6 +41,22 @@ class AuthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupWindowInsets()
+        bindToViewModel()
+
+        binding.buttonSignIn.setOnClickListener {
+            viewModel.onSignButtonPressed()
+        }
+    }
+
+    private fun bindToViewModel() {
+        bindTokenInput()
+        bindStateObserver()
+        bindActionsCollector()
+    }
+
+    private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.layoutAuthFragment) { v, insets ->
             val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(
@@ -50,14 +66,17 @@ class AuthFragment : Fragment() {
                 systemBarInsets.bottom
             )
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val defaultMarginBottom = resources.getDimensionPixelSize(R.dimen.default_button_margin_bottom)
+            val defaultMarginBottom =
+                resources.getDimensionPixelSize(R.dimen.default_button_margin_bottom)
             binding.buttonSignIn.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = if (imeInsets.bottom > 0) imeInsets.bottom else defaultMarginBottom
             }
             insets
         }
         ViewCompat.requestApplyInsets(binding.layoutAuthFragment)
+    }
 
+    private fun bindTokenInput() {
         binding.editTextToken.setOnFocusChangeListener { _, _ ->
             viewModel.refreshState()
         }
@@ -67,12 +86,16 @@ class AuthFragment : Fragment() {
                 viewModel.token.value = text?.toString()
             }
         )
+    }
 
+    private fun bindStateObserver() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             binding.progressBarSignIn.visibility =
                 if (state is AuthViewModel.State.Loading) View.VISIBLE else View.GONE
+
             binding.textInvalidToken.visibility =
                 if (state is AuthViewModel.State.InvalidInput) View.VISIBLE else View.GONE
+
             binding.textInvalidToken.text =
                 if (state is AuthViewModel.State.InvalidInput) {
                     when (state.reasonCode) {
@@ -81,6 +104,7 @@ class AuthFragment : Fragment() {
                         AuthViewModel.ErrorReason.UNKNOWN_ERROR -> getString(R.string.unknown_error)
                     }
                 } else null
+
             binding.buttonSignIn.isEnabled = state !is AuthViewModel.State.Loading
             binding.buttonSignIn.text =
                 if (state is AuthViewModel.State.Loading) "" else getString(R.string.sign_in)
@@ -89,6 +113,7 @@ class AuthFragment : Fragment() {
                 if (state is AuthViewModel.State.InvalidInput) R.color.error
                 else if (binding.editTextToken.hasFocus()) R.color.blue
                 else R.color.gray
+
             val heightDp = if (colorRes == R.color.gray) 1 else 2
             setUnderline(colorRes, heightDp)
 
@@ -96,18 +121,19 @@ class AuthFragment : Fragment() {
                 if (state is AuthViewModel.State.InvalidInput) R.color.error
                 else if (binding.editTextToken.hasFocus()) R.color.blue
                 else R.color.white_50_percent
+
             val hintColor = ContextCompat.getColor(requireContext(), hintColorRes)
             val colorStateList = ColorStateList.valueOf(hintColor)
             binding.inputLayoutToken.defaultHintTextColor = colorStateList
         }
+    }
+
+    private fun bindActionsCollector() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.actions.collect { action ->
                     when (action) {
-                        is AuthViewModel.Action.ShowError -> {
-                            showAlert(action.message)
-                        }
-
+                        is AuthViewModel.Action.ShowError -> showAlert()
                         is AuthViewModel.Action.RouteToMain -> {
                             val directions =
                                 AuthFragmentDirections.actionAuthFragmentToRepositoriesListFragment()
@@ -116,9 +142,6 @@ class AuthFragment : Fragment() {
                     }
                 }
             }
-        }
-        binding.buttonSignIn.setOnClickListener {
-            viewModel.onSignButtonPressed()
         }
     }
 
@@ -131,11 +154,11 @@ class AuthFragment : Fragment() {
         binding.viewTokenUnderline.requestLayout()
     }
 
-    private fun showAlert(message: String) {
-        val formattedMessage = getString(R.string.error_message, message)
+    private fun showAlert() {
+        val message = getString(R.string.error_message)
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setTitle(getString(R.string.error_title))
-            .setMessage(formattedMessage)
+            .setMessage(message)
             .setPositiveButton(getString(R.string.ok_button), null)
             .show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(

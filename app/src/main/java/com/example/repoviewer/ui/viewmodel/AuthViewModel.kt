@@ -1,5 +1,6 @@
 package com.example.repoviewer.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,16 +45,16 @@ class AuthViewModel @Inject constructor(
                     _state.value = State.Idle
                 }
             } catch (e: Exception) {
+                Log.e("AuthViewModel", "SignIn error", e)
+
                 if (e is HttpException && e.code() == 401) {
                     _state.value = State.InvalidInput(ErrorReason.INVALID_TOKEN)
                     return@launch
                 }
-                val message = e.message.takeUnless { it.isNullOrBlank() }
-                if (message != null) {
-                    _actions.emit(Action.ShowError(message))
-                } else {
-                    _state.value = State.InvalidInput(ErrorReason.UNKNOWN_ERROR)
-                }
+                _state.value = State.InvalidInput(ErrorReason.UNKNOWN_ERROR)
+
+                _actions.emit(Action.ShowError)
+
                 _state.value = State.Idle
             }
         }
@@ -66,7 +67,7 @@ class AuthViewModel @Inject constructor(
     }
 
     sealed interface Action {
-        data class ShowError(val message: String) : Action
+        object ShowError : Action
         object RouteToMain : Action
     }
 

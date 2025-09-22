@@ -5,7 +5,7 @@
     <string name="empty_token">Токен не должен быть пустым</string>
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="ok_button">ОК</string>
-    <string name="error_message">Данные об ошибке / код ошибки&#10;Информация для разработчиков:&#10;%1$s</string>
+    <string name="error_message">Данные об ошибке / код ошибки\\nИнформация для разработчиков</string>
     <string name="sign_in">Войти</string>
     <string name="repositories">Репозитории</string>
     <string name="back">Назад</string>
