@@ -7,7 +7,7 @@ import com.example.repoviewer.domain.model.Repo
 data class Repo(
     val id: Long,
     val name: String,
-    val language: String,
+    val language: String? = null,
     val description: String? = null,
     val owner: Owner
 ) {

@@ -36,7 +36,7 @@ class RepoAdapter : ListAdapter<Repo, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK)
             binding.textRepoDescription.text =
                 repo.description ?: binding.root.context.getString(R.string.no_description)
 
-            val color = when (repo.language.lowercase()) {
+            val color = when (repo.language?.lowercase()) {
                 "kotlin" -> ContextCompat.getColor(binding.root.context, R.color.purple)
                 "java" -> ContextCompat.getColor(binding.root.context, R.color.red)
                 "javascript" -> ContextCompat.getColor(binding.root.context, R.color.yellow)
