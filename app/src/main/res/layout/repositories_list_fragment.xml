@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/repositories"
-        app:titleTextAppearance="@style/RepositoriesTitleText">
+        app:titleTextAppearance="@style/RepositoriesTitleText"
+        app:contentInsetStart="24dp">
 
         <ImageButton
             android:id="@+id/button_log_out_repositories"

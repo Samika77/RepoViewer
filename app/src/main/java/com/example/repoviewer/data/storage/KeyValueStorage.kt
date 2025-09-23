@@ -13,6 +13,12 @@ class KeyValueStorage @Inject constructor(
             putString(KEY_AUTH_TOKEN, value)
         }
 
+    fun clearAuthToken() {
+        sharedPreferences.edit {
+            remove(KEY_AUTH_TOKEN)
+        }
+    }
+
     companion object {
         private const val KEY_AUTH_TOKEN = "auth_token"
     }

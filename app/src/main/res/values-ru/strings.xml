@@ -10,6 +10,7 @@
     <string name="repositories">Репозитории</string>
     <string name="back">Назад</string>
     <string name="log_out">Выйти</string>
+    <string name="no_description">Без описания</string>
     <string name="connection_error">Ошибка подключения</string>
     <string name="check_connection">Проверьте подключение к Интернету</string>
     <string name="empty">Пусто</string>

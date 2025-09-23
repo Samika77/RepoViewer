@@ -25,12 +25,22 @@
         <action
             android:id="@+id/action_repositoriesListFragment_to_detailInfoFragment"
             app:destination="@id/detailInfoFragment" />
+
+        <action
+            android:id="@+id/action_repositoriesListFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/repositoriesListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/detailInfoFragment"
         android:name="com.example.repoviewer.ui.fragment.DetailInfoFragment"
         android:label="Detail Info"
-        tools:layout="@layout/detail_info_fragment" />
+        tools:layout="@layout/detail_info_fragment">
 
+        <argument
+            android:name="repoId"
+            app:argType="string" />
+    </fragment>
 </navigation>
