@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.repoviewer.data.repository.AppRepository
+import com.example.repoviewer.data.storage.KeyValueStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,14 +17,25 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repository: AppRepository
+    private val repository: AppRepository,
+    private val storage: KeyValueStorage
 ) : ViewModel() {
     val token = MutableLiveData<String>()
     private val _state = MutableLiveData<State>(State.Idle)
     val state: LiveData<State> = _state
 
-    private val _actions = MutableSharedFlow<Action>()
+    private val _actions = MutableSharedFlow<Action>(replay = 1)
     val actions: Flow<Action> = _actions.asSharedFlow()
+
+    init {
+        val savedToken = storage.authToken
+        if (!savedToken.isNullOrBlank()) {
+            token.value = savedToken
+            viewModelScope.launch {
+                _actions.emit(Action.RouteToMain)
+            }
+        }
+    }
 
     fun refreshState() {
         _state.value = _state.value
@@ -41,6 +53,7 @@ class AuthViewModel @Inject constructor(
             try {
                 val userInfo = repository.signIn(currentToken)
                 if (userInfo.isTokenValid) {
+                    storage.authToken = currentToken
                     _actions.emit(Action.RouteToMain)
                     _state.value = State.Idle
                 }
