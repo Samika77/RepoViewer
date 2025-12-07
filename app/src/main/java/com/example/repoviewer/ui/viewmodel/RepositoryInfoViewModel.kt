@@ -41,9 +41,9 @@ class RepositoryInfoViewModel @Inject constructor(
             val readmeMarkdown = try {
                 repository.getRepositoryReadme(
                     ownerName = repoDetails.ownerLogin,
-                    repositoryName = repoDetails.name,
-                    branchName = repoDetails.defaultBranch
+                    repositoryName = repoDetails.name
                 )
+
             } catch (e: retrofit2.HttpException) {
                 if (e.code() == 404) {
                     _state.value = State.Loaded(
