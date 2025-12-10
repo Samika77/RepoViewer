@@ -2,7 +2,7 @@ package com.example.repoviewer.data.repository
 
 import com.example.repoviewer.data.network.GithubApi
 import com.example.repoviewer.data.storage.KeyValueStorage
-import com.example.repoviewer.data.network.toDomain
+import com.example.repoviewer.data.network.model.toDomain
 import com.example.repoviewer.domain.model.Readme
 import com.example.repoviewer.domain.model.RepoDetails
 import com.example.repoviewer.domain.model.UserInfo

@@ -1,21 +1,31 @@
-package com.example.repoviewer.data.network
+package com.example.repoviewer.data.network.model
 
 import kotlinx.serialization.Serializable
 import com.example.repoviewer.domain.model.Repo
+import kotlinx.serialization.SerialName
 
 @Serializable
-data class Repo(
+data class RepoResponse(
+    @SerialName("id")
     val id: Long,
+
+    @SerialName("name")
     val name: String,
+
+    @SerialName("language")
     val language: String? = null,
+
+    @SerialName("description")
     val description: String? = null,
+
+    @SerialName("owner")
     val owner: Owner
 ) {
     val repoId: String
         get() = "${owner.login}/$name"
 }
 
-fun com.example.repoviewer.data.network.Repo.toDomain(): Repo {
+fun RepoResponse.toDomain(): Repo {
     return Repo(
         id = this.id,
         name = this.name,
