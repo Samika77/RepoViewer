@@ -2,10 +2,15 @@
 <resources>
     <string name="personal_access_token">Персональный токен доступа</string>
     <string name="invalid_token">Неверный токен</string>
+    <string name="empty_token">Токен не должен быть пустым</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="ok_button">ОК</string>
+    <string name="error_message">Данные об ошибке / код ошибки\\nИнформация для разработчиков</string>
     <string name="sign_in">Войти</string>
     <string name="repositories">Репозитории</string>
     <string name="back">Назад</string>
     <string name="log_out">Выйти</string>
+    <string name="no_description">Без описания</string>
     <string name="connection_error">Ошибка подключения</string>
     <string name="check_connection">Проверьте подключение к Интернету</string>
     <string name="empty">Пусто</string>
@@ -16,8 +21,10 @@
     <string name="refresh">Обновить</string>
     <string name="link">Ссылка на репозиторий</string>
     <string name="license">Лицензия</string>
+    <string name="no_license">Нет лицензии</string>
     <string name="stars">Звезды</string>
     <string name="forks">Копии</string>
     <string name="watchers">Подписчики</string>
     <string name="no_readme">Отсутствует README.md</string>
+    <string name="error_title">Ошибка</string>
 </resources>

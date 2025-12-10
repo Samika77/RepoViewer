@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.repoviewer.AuthFragment"
+        android:name="com.example.repoviewer.ui.fragment.AuthFragment"
         android:label="Auth"
         tools:layout="@layout/auth_fragment">
 
@@ -18,19 +18,35 @@
 
     <fragment
         android:id="@+id/repositoriesListFragment"
-        android:name="com.example.repoviewer.RepositoriesListFragment"
+        android:name="com.example.repoviewer.ui.fragment.RepositoriesListFragment"
         android:label="Repositories List"
         tools:layout="@layout/repositories_list_fragment">
 
         <action
             android:id="@+id/action_repositoriesListFragment_to_detailInfoFragment"
             app:destination="@id/detailInfoFragment" />
+
+        <action
+            android:id="@+id/action_repositoriesListFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/repositoriesListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/detailInfoFragment"
-        android:name="com.example.repoviewer.DetailInfoFragment"
+        android:name="com.example.repoviewer.ui.fragment.DetailInfoFragment"
         android:label="Detail Info"
-        tools:layout="@layout/detail_info_fragment" />
+        tools:layout="@layout/detail_info_fragment">
 
+        <argument
+            android:name="repoId"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_detailInfoFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/detailInfoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
